@@ -3,7 +3,7 @@
 %global build_ldflags %{build_ldflags} -flto
 
 Name:           RetroArch
-Version:        1.8.5
+Version:        1.8.8
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -62,6 +62,9 @@ Provides:       bundled(lua) = 5.3.5
 Provides:       bundled(rcheevos) = 7.0.2
 Provides:       bundled(SPIRV-Cross)
 Provides:       bundled(stb)
+
+# Lowercase provide
+Provides:       retroarch
 
 %description
 libretro is an API that exposes generic audio/video/input callbacks. A frontend
@@ -128,5 +131,8 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Mon Jun 15 2020 Simone Caronni <negativo17@gmail.com> - 1.8.8-1
+- Update to 1.8.8.
+
 * Sun Mar 29 2020 Simone Caronni <negativo17@gmail.com> - 1.8.5-1
 - First build, pick some stuff from RPMFusion.
