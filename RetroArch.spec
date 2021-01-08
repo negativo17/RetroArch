@@ -1,37 +1,44 @@
-%global appstream_id org.libretro.%{name}
-%global optflags %{optflags} -flto
-%global build_ldflags %{build_ldflags} -flto
+# To do:
+# - Check Cg, OpenGL ES 2/3 build options
+
+%global _lto_cflags %{nil}
+
+%global appstream_id com.libretro.%{name}
 
 Name:           RetroArch
-Version:        1.8.8
+Epoch:          1
+Version:        1.9.0
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
 
-Source0:        https://github.com/libretro/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-# https://github.com/flathub/org.libretro.RetroArch/blob/master/org.libretro.RetroArch.appdata.xml
-# Repository does not have all tags/releases, master contains the last released version:
-Source1:        https://raw.githubusercontent.com/flathub/org.libretro.%{name}/master/org.libretro.%{name}.appdata.xml
+Source0:        https://github.com/libretro/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires:  alsa-lib-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  ffmpeg-devel
 BuildRequires:  gcc-c++
+BuildRequires:  jack-audio-connection-kit-devel
 BuildRequires:  libappstream-glib
 BuildRequires:  libv4l-devel
 BuildRequires:  libXrandr-devel
+BuildRequires:  libXv-devel
 BuildRequires:  libXxf86vm-devel
+BuildRequires:  lua-devel
 BuildRequires:  mbedtls-devel
 BuildRequires:  mesa-libEGL-devel
 BuildRequires:  mesa-libgbm-devel
+BuildRequires:  mesa-libOSMesa-devel
+BuildRequires:  miniupnpc-devel
 BuildRequires:  pkgconfig(caca)
+BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(flac)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(libass)
 BuildRequires:  pkgconfig(libpulse)
 BuildRequires:  pkgconfig(libusb)
 BuildRequires:  pkgconfig(libxml-2.0)
-BuildRequires:  pkgconfig(miniupnpc)
 BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(Qt5Concurrent) >= 5.2
@@ -55,16 +62,17 @@ Requires:       perl(X11::Protocol)
 Provides:       bundled(7zip) = 9.20
 Provides:       bundled(discord-rpc)
 Provides:       bundled(dr)
+# Fails with undefined references with packaged glslang:
+Provides:       bundled(glslang)
 Provides:       bundled(ibxm)
-# https://github.com/libretro/RetroArch/issues/8153
-# https://github.com/RetroAchievements/rcheevos/issues/15
-Provides:       bundled(lua) = 5.3.5
+# https://github.com/libretro/RetroArch/issues/8153:
+Provides:       bundled(lua)
 Provides:       bundled(rcheevos) = 7.0.2
 Provides:       bundled(SPIRV-Cross)
 Provides:       bundled(stb)
 
 # Lowercase provide
-Provides:       retroarch
+Provides:       retroarch == %{epoch}:%{version}-%{release}
 
 %description
 libretro is an API that exposes generic audio/video/input callbacks. A frontend
@@ -82,16 +90,16 @@ engines. libretro is completely open and free for anyone to use.
 # Remove bundles
 pushd deps
 rm -rf \
-    glslang \
-    libfat \
-    libFLAC \
-    libiosuhax \
-    libvita2d \
-    libz \
-    miniupnpc \
-    peglib \
-    pthreads \
-    wayland-protocols
+  libfat \
+  libFLAC \
+  libiosuhax \
+  libvita2d \
+  libz \
+  mbdetls \
+  miniupnpc \
+  peglib \
+  pthreads \
+  wayland-protocols
 popd
 
 %build
@@ -99,17 +107,73 @@ popd
 # Not an autotools configure script:
 ./configure \
     --disable-builtinflac \
-    --disable-builtinglslang \
     --disable-builtinmbedtls \
     --disable-builtinminiupnpc \
     --disable-builtinzlib \
+    --disable-cg \
+    --disable-opengles \
+    --disable-opengles3 \
+    --enable-al \
+    --enable-alsa \
+    --enable-blissbox \
+    --enable-builtinglslang \
+    --enable-caca \
+    --enable-cdrom \
+    --enable-dbus \
+    --enable-dylib \
+    --enable-dynamic_egl \
+    --enable-egl \
+    --enable-ffmpeg \
+    --enable-flac \
+    --enable-freetype \
+    --enable-gong \
+    --enable-jack \
+    --enable-kms \
+    --enable-libusb \
+    --enable-lua \
+    --enable-materialui \
+    --enable-miniupnpc \
+    --enable-mmap \
+    --enable-networkgamepad \
+    --enable-networking \
+    --enable-nvda \
+    --enable-opengl \
+    --enable-osmesa \
+    --enable-oss \
+    --enable-ozone \
+    --enable-parport \
+    --enable-plain_drm \
+    --enable-pulse \
+    --enable-qt \
+    --enable-rgui \
+    --enable-sdl2 \
+    --enable-slang \
+    --enable-spirv_cross \
+    --enable-ssa \
+    --enable-sse \
+    --enable-ssl \
+    --enable-systemd \
+    --enable-threads \
+    --enable-thread_storage \
+    --enable-tinyalsa \
+    --enable-udev \
+    --enable-v4l2 \
+    --enable-videoprocessor \
+    --enable-vulkan \
+    --enable-wayland \
+    --enable-x11 \
+    --enable-xinerama \
+    --enable-xmb \
+    --enable-xrandr \
+    --enable-xshm \
+    --enable-xvideo \
+    --enable-zlib \
     --prefix=%{_prefix}
 
 %make_build
 
 %install
 %make_install
-install -p -m 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/%{appstream_id}.appdata.xml
 
 # Let RPM pick up docs in the files section
 rm -fr %{buildroot}%{_docdir}
@@ -127,10 +191,16 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %{_datadir}/pixmaps/retroarch.svg
 %{_mandir}/man6/retroarch.6*
 %{_mandir}/man6/retroarch-cg2glsl.6*
+%if 0%{?fedora} || 0%{?rhel} >= 8
 %{_metainfodir}/%{appstream_id}.appdata.xml
+%endif
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Fri Jan  8 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.0-1
+- Update to 1.9.0.
+- Revamp build.
+
 * Mon Jun 15 2020 Simone Caronni <negativo17@gmail.com> - 1.8.8-1
 - Update to 1.8.8.
 
