@@ -191,9 +191,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %{_datadir}/pixmaps/retroarch.svg
 %{_mandir}/man6/retroarch.6*
 %{_mandir}/man6/retroarch-cg2glsl.6*
-%if 0%{?fedora} || 0%{?rhel} >= 8
 %{_metainfodir}/%{appstream_id}.appdata.xml
-%endif
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
