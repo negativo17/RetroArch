@@ -7,13 +7,14 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.9.0
+Version:        1.9.1
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
 
 Source0:        https://github.com/libretro/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch0:         https://github.com/libretro/%{name}/commit/cbec423413b85202131b69c0a314a6c29335e135.patch
 
 BuildRequires:  alsa-lib-devel
 BuildRequires:  desktop-file-utils
@@ -195,6 +196,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Thu Apr 22 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.1-1
+- Update to 1.9.1.
+
 * Fri Jan  8 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.0-1
 - Update to 1.9.0.
 - Revamp build.
