@@ -72,7 +72,14 @@ Provides:       bundled(SPIRV-Cross)
 Provides:       bundled(stb)
 
 # Lowercase provide
+Obsoletes:      retroarch <= %{epoch}:%{version}-%{release}
 Provides:       retroarch == %{epoch}:%{version}-%{release}
+Obsoletes:      retroarch-assets <= %{epoch}:%{version}-%{release}
+Provides:       retroarch-assets == %{epoch}:%{version}-%{release}
+Obsoletes:      retroarch-database <= %{epoch}:%{version}-%{release}
+Provides:       retroarch-database == %{epoch}:%{version}-%{release}
+Obsoletes:      retroarch-filters <= %{epoch}:%{version}-%{release}
+Provides:       retroarch-filters == %{epoch}:%{version}-%{release}
 
 %description
 libretro is an API that exposes generic audio/video/input callbacks. A frontend
@@ -197,6 +204,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %changelog
 * Tue Aug 10 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.7-1
 - Update to 1.9.7.
+- Obsolete/provide Fedora's main packages.
 
 * Thu Apr 22 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.1-1
 - Update to 1.9.1.
