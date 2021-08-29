@@ -7,7 +7,7 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.9.7
+Version:        1.9.8
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -202,6 +202,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Sun Aug 29 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.8-1
+- Update to 1.9.8.
+
 * Tue Aug 10 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.7-1
 - Update to 1.9.7.
 - Obsolete/provide Fedora's main packages.
