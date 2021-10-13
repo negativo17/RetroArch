@@ -7,7 +7,7 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.9.10
+Version:        1.9.11
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -118,8 +118,7 @@ popd
     --disable-builtinminiupnpc \
     --disable-builtinzlib \
     --disable-cg \
-    --disable-opengles \
-    --disable-opengles3 \
+    --disable-opengl_core \
     --enable-al \
     --enable-alsa \
     --enable-blissbox \
@@ -128,7 +127,6 @@ popd
     --enable-cdrom \
     --enable-dbus \
     --enable-dylib \
-    --enable-dynamic_egl \
     --enable-egl \
     --enable-ffmpeg \
     --enable-flac \
@@ -144,9 +142,6 @@ popd
     --enable-networkgamepad \
     --enable-networking \
     --enable-nvda \
-    --enable-opengl \
-    --enable-osmesa \
-    --enable-oss \
     --enable-ozone \
     --enable-parport \
     --enable-plain_drm \
@@ -162,7 +157,6 @@ popd
     --enable-systemd \
     --enable-threads \
     --enable-thread_storage \
-    --enable-tinyalsa \
     --enable-udev \
     --enable-v4l2 \
     --enable-videoprocessor \
@@ -202,6 +196,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Wed Oct 13 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.11-1
+- Update to 1.9.11.
+
 * Fri Sep 24 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.10-1
 - Update to 1.9.10.
 
