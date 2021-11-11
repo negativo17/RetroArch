@@ -7,7 +7,7 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.9.13
+Version:        1.9.13.1
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -152,7 +152,6 @@ popd
     --enable-slang \
     --enable-spirv_cross \
     --enable-ssa \
-    --enable-sse \
     --enable-ssl \
     --enable-systemd \
     --enable-threads \
@@ -196,6 +195,10 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Thu Nov 11 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.13.1-1
+- Update to 1.9.13.1.
+- Fix build on aarch64.
+
 * Sun Nov 07 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.13-1
 - Update to 1.9.13.
 
