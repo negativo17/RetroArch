@@ -1,13 +1,8 @@
-# To do:
-# - Check Cg, OpenGL ES 2/3 build options
-
-%global _lto_cflags %{nil}
-
 %global appstream_id com.libretro.%{name}
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.9.14
+Version:        1.10.2
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -30,7 +25,6 @@ BuildRequires:  mbedtls-devel
 BuildRequires:  mesa-libEGL-devel
 BuildRequires:  mesa-libgbm-devel
 BuildRequires:  mesa-libOSMesa-devel
-BuildRequires:  miniupnpc-devel
 BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(flac)
@@ -115,7 +109,6 @@ popd
 ./configure \
     --disable-builtinflac \
     --disable-builtinmbedtls \
-    --disable-builtinminiupnpc \
     --disable-builtinzlib \
     --disable-cg \
     --disable-opengl_core \
@@ -125,20 +118,21 @@ popd
     --enable-builtinglslang \
     --enable-caca \
     --enable-cdrom \
+    --enable-crtswitchres \
     --enable-dbus \
     --enable-dylib \
+    --enable-dynamic_egl \
     --enable-egl \
     --enable-ffmpeg \
     --enable-flac \
     --enable-freetype \
-    --enable-gong \
     --enable-jack \
     --enable-kms \
     --enable-libusb \
     --enable-lua \
     --enable-materialui \
-    --enable-miniupnpc \
     --enable-mmap \
+    --enable-memfd_create \
     --enable-networkgamepad \
     --enable-networking \
     --enable-nvda \
@@ -161,6 +155,7 @@ popd
     --enable-videoprocessor \
     --enable-vulkan \
     --enable-wayland \
+    --enable-wifi \
     --enable-x11 \
     --enable-xinerama \
     --enable-xmb \
@@ -195,6 +190,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Fri Apr 08 2022 Simone Caronni <negativo17@gmail.com> - 1:1.10.2-1
+- Update to 1.10.2.
+
 * Thu Dec 09 2021 Simone Caronni <negativo17@gmail.com> - 1:1.9.14-1
 - Update to 1.9.14.
 
