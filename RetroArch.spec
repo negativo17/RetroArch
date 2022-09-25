@@ -3,20 +3,16 @@
 Name:           RetroArch
 Epoch:          1
 Version:        1.10.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
 
 Source0:        https://github.com/libretro/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:  alsa-lib-devel
 BuildRequires:  desktop-file-utils
-BuildRequires:  ffmpeg-devel
 BuildRequires:  gcc-c++
-BuildRequires:  jack-audio-connection-kit-devel
 BuildRequires:  libappstream-glib
-BuildRequires:  libv4l-devel
 BuildRequires:  libXrandr-devel
 BuildRequires:  libXv-devel
 BuildRequires:  libXxf86vm-devel
@@ -25,13 +21,23 @@ BuildRequires:  mbedtls-devel
 BuildRequires:  mesa-libEGL-devel
 BuildRequires:  mesa-libgbm-devel
 BuildRequires:  mesa-libOSMesa-devel
+BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(flac)
 BuildRequires:  pkgconfig(freetype2)
+BuildRequires:  pkgconfig(jack) >= 0.120.1
 BuildRequires:  pkgconfig(libass)
+BuildRequires:  pkgconfig(libavcodec) >= 57
+BuildRequires:  pkgconfig(libavdevice) >= 57
+BuildRequires:  pkgconfig(libavformat) >= 57
+BuildRequires:  pkgconfig(libavutil) >= 55
+BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpulse)
+BuildRequires:  pkgconfig(libswresample) >= 2
+BuildRequires:  pkgconfig(libswscale) >= 4
 BuildRequires:  pkgconfig(libusb)
+BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(openssl)
@@ -42,12 +48,14 @@ BuildRequires:  pkgconfig(Qt5Network) >= 5.2
 BuildRequires:  pkgconfig(Qt5Widgets) >= 5.2
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(vulkan)
+BuildRequires:  pkgconfig(wayland-egl) >= 10.1.0
+BuildRequires:  pkgconfig(wayland-cursor) >= 1.12
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.15
+BuildRequires:  pkgconfig(wayland-scanner) >= 1.15
 BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  systemd-devel
-BuildRequires:  wayland-devel
-BuildRequires:  wayland-protocols-devel
 
 # Required at runtime:
 Requires:       perl(Net::DBus)
@@ -190,6 +198,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Sun Sep 25 2022 Simone Caronni <negativo17@gmail.com> - 1:1.10.3-2
+- Update build requirements.
+
 * Sun Apr 17 2022 Simone Caronni <negativo17@gmail.com> - 1:1.10.3-1
 - Update to 1.10.3.
 
