@@ -2,8 +2,8 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.10.3
-Release:        2%{?dist}
+Version:        1.11.1
+Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
@@ -36,7 +36,7 @@ BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpulse)
 BuildRequires:  pkgconfig(libswresample) >= 2
 BuildRequires:  pkgconfig(libswscale) >= 4
-BuildRequires:  pkgconfig(libusb)
+BuildRequires:  pkgconfig(libusb-1.0) >= 1.0.13
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(openal)
@@ -56,6 +56,11 @@ BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  systemd-devel
+
+%if 0%{?fedora}
+BuildRequires:  pkgconfig(check) >= 0.15
+BuildRequires:  pkgconfig(libdecor-0)
+%endif
 
 # Required at runtime:
 Requires:       perl(Net::DBus)
@@ -134,6 +139,7 @@ popd
     --enable-ffmpeg \
     --enable-flac \
     --enable-freetype \
+    --enable-hid \
     --enable-jack \
     --enable-kms \
     --enable-libusb \
@@ -171,7 +177,11 @@ popd
     --enable-xshm \
     --enable-xvideo \
     --enable-zlib \
-    --prefix=%{_prefix}
+    --prefix=%{_prefix} \
+%if 0%{?fedora}
+    --enable-check \
+    --enable-libdecor
+%endif
 
 %make_build
 
@@ -198,6 +208,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Wed Oct 05 2022 Simone Caronni <negativo17@gmail.com> - 1:1.11.1-1
+- Update to 1.11.1.
+
 * Sun Sep 25 2022 Simone Caronni <negativo17@gmail.com> - 1:1.10.3-2
 - Update build requirements.
 
