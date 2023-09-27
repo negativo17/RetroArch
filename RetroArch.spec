@@ -129,17 +129,27 @@ popd
     --enable-alsa \
     --enable-blissbox \
     --enable-builtinglslang \
+    --enable-bsv_movie \
+    --enable-cc_resampler \
     --enable-caca \
     --enable-cdrom \
+    --enable-chd \
+    --enable-cheats \
+    --enable-cheevos \
+    --enable-configfile \
     --enable-crtswitchres \
     --enable-dbus \
+    --enable-dsp_filter \
     --enable-dylib \
-    --enable-dynamic_egl \
+    --enable-dynamic \
     --enable-egl \
     --enable-ffmpeg \
     --enable-flac \
     --enable-freetype \
+    --enable-gfx_widgets \
+    --enable-glsl \
     --enable-hid \
+    --enable-imageviewer \
     --enable-jack \
     --enable-kms \
     --enable-libshake \
