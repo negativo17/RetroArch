@@ -2,7 +2,7 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.16.0.3
+Version:        1.17.0
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -13,6 +13,7 @@ Source0:        https://github.com/libretro/%{name}/archive/v%{version}/%{name}-
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
 BuildRequires:  libappstream-glib
+BuildRequires:  libsixel-devel
 BuildRequires:  libXrandr-devel
 BuildRequires:  libXv-devel
 BuildRequires:  libXxf86vm-devel
@@ -26,6 +27,7 @@ BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(flac)
 BuildRequires:  pkgconfig(freetype2)
+BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(jack) >= 0.120.1
 BuildRequires:  pkgconfig(libass)
 BuildRequires:  pkgconfig(libavcodec) >= 57
@@ -120,25 +122,32 @@ popd
 %set_build_flags
 # Not an autotools configure script:
 ./configure \
+    --disable-7zip \
+    --disable-builtinbearssl \
     --disable-builtinflac \
     --disable-builtinmbedtls \
     --disable-builtinzlib \
     --disable-cg \
-    --disable-opengl_core \
+    --enable-accessibility \
     --enable-al \
     --enable-alsa \
     --enable-blissbox \
-    --enable-builtinglslang \
+    --enable-bluetooth \
     --enable-bsv_movie \
-    --enable-cc_resampler \
+    --enable-builtinglslang \
     --enable-caca \
+    --enable-cc_resampler \
     --enable-cdrom \
     --enable-chd \
     --enable-cheats \
     --enable-cheevos \
+    --enable-command \
     --enable-configfile \
+    --enable-core_info_cache \
     --enable-crtswitchres \
     --enable-dbus \
+    --enable-discord \
+    --enable-dr_mp3 \
     --enable-dsp_filter \
     --enable-dylib \
     --enable-dynamic \
@@ -149,18 +158,33 @@ popd
     --enable-gfx_widgets \
     --enable-glsl \
     --enable-hid \
+    --enable-ibxm \
+    --enable-ifinfo \
     --enable-imageviewer \
     --enable-jack \
     --enable-kms \
+    --enable-langextra \
+    --enable-libretrodb \
     --enable-libshake \
     --enable-libusb \
     --enable-lua \
     --enable-materialui \
     --enable-mmap \
     --enable-memfd_create \
+    --enable-menu \
+    --enable-microphone \
+    --enable-mmap \
+    --enable-nearest_resampler \
+    --enable-netplaydiscovery \
     --enable-networkgamepad \
     --enable-networking \
     --enable-nvda \
+    --enable-online_updater \
+    --enable-opengl \
+    --enable-opengl_core \
+    --enable-opengl1 \
+    --enable-oss \
+    --enable-overlay \
     --enable-ozone \
     --enable-parport \
     --enable-plain_drm \
@@ -168,20 +192,34 @@ popd
     --enable-qt \
     --enable-rgui \
     --enable-sdl2 \
+    --enable-shaderpipeline \
+    --enable-sixel \
     --enable-slang \
     --enable-spirv_cross \
     --enable-ssa \
     --enable-ssl \
+    --enable-stb_font \
+    --enable-stb_image \
+    --enable-stb_vorbis \
     --enable-systemd \
+    --enable-systemmbedtls \
     --enable-threads \
     --enable-thread_storage \
+    --enable-tinyalsa \
+    --enable-translate \
     --enable-udev \
+    --enable-update_assets \
+    --enable-update_core_info \
+    --enable-update_cores \
     --enable-v4l2 \
+    --enable-video_filter \
     --enable-videoprocessor \
     --enable-vulkan \
+    --enable-vulkan_display \
     --enable-wayland \
     --enable-wifi \
     --enable-x11 \
+    --enable-xdelta \
     --enable-xinerama \
     --enable-xmb \
     --enable-xrandr \
@@ -219,6 +257,10 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Wed Feb 07 2024 Simone Caronni <negativo17@gmail.com> - 1:1.17.0-1
+- Update to 1.17.0.
+- Expand support options.
+
 * Thu Oct 05 2023 Simone Caronni <negativo17@gmail.com> - 1:1.16.0.3-1
 - Update to 1.16.0.3.
 
