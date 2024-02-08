@@ -20,13 +20,13 @@ BuildRequires:  libXxf86vm-devel
 BuildRequires:  lua-devel
 BuildRequires:  mbedtls-devel
 BuildRequires:  mesa-libEGL-devel
-BuildRequires:  mesa-libgbm-devel
 BuildRequires:  mesa-libOSMesa-devel
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(flac)
 BuildRequires:  pkgconfig(freetype2)
+BuildRequires:  pkgconfig(gbm) >= 9.0
 BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(jack) >= 0.120.1
 BuildRequires:  pkgconfig(libass)
@@ -42,20 +42,20 @@ BuildRequires:  pkgconfig(libusb-1.0) >= 1.0.13
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(openal)
-BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(openssl) >= 1.0.0
 BuildRequires:  pkgconfig(Qt5Concurrent) >= 5.2
 BuildRequires:  pkgconfig(Qt5Core) >= 5.2
 BuildRequires:  pkgconfig(Qt5Gui) >= 5.2
 BuildRequires:  pkgconfig(Qt5Network) >= 5.2
 BuildRequires:  pkgconfig(Qt5Widgets) >= 5.2
-BuildRequires:  pkgconfig(sdl2)
+BuildRequires:  pkgconfig(sdl2) >= 2.0.0
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-egl) >= 10.1.0
 BuildRequires:  pkgconfig(wayland-cursor) >= 1.12
-BuildRequires:  pkgconfig(wayland-protocols) >= 1.15
-BuildRequires:  pkgconfig(wayland-scanner) >= 1.15
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.31
+BuildRequires:  pkgconfig(wayland-scanner) >= 1.12
 BuildRequires:  pkgconfig(xinerama)
-BuildRequires:  pkgconfig(xkbcommon)
+BuildRequires:  pkgconfig(xkbcommon) >= 0.3.2
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  systemd-devel
 
