@@ -2,7 +2,7 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.17.0
+Version:        1.18.0
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -178,6 +178,7 @@ popd
     --enable-netplaydiscovery \
     --enable-networkgamepad \
     --enable-networking \
+    --enable-network_video \
     --enable-nvda \
     --enable-online_updater \
     --enable-opengl \
@@ -187,16 +188,29 @@ popd
     --enable-overlay \
     --enable-ozone \
     --enable-parport \
+    --enable-patch \
     --enable-plain_drm \
     --enable-pulse \
     --enable-qt \
+    --enable-rbmp \
+    --enable-rewind \
     --enable-rgui \
+    --enable-rjpeg \
+    --enable-rpiled \
+    --enable-rpng \
+    --enable-rtga \
+    --enable-runahead \
+    --enable-rwav \
+    --enable-screenshots \
     --enable-sdl2 \
     --enable-shaderpipeline \
     --enable-sixel \
     --enable-slang \
     --enable-spirv_cross \
     --enable-ssa \
+%ifarch x86_64
+    --enable-sse \
+%endif
     --enable-ssl \
     --enable-stb_font \
     --enable-stb_image \
@@ -257,6 +271,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Thu Apr 04 2024 Simone Caronni <negativo17@gmail.com> - 1:1.18.0-1
+- Update to 1.18.0.
+
 * Wed Feb 07 2024 Simone Caronni <negativo17@gmail.com> - 1:1.17.0-1
 - Update to 1.17.0.
 - Expand support options.
