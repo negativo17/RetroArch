@@ -1,8 +1,6 @@
-%global appstream_id com.libretro.%{name}
-
 Name:           RetroArch
 Epoch:          1
-Version:        1.18.0
+Version:        1.19.1
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -255,22 +253,25 @@ popd
 rm -fr %{buildroot}%{_docdir}
 
 %check
-desktop-file-validate %{buildroot}%{_datadir}/applications/retroarch.desktop
-appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appstream_id}.appdata.xml
+desktop-file-validate %{buildroot}%{_datadir}/applications/org.libretro.RetroArch.desktop
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/com.libretro.RetroArch.appdata.xml
 
 %files
 %license COPYING
 %doc CHANGES.md CONTRIBUTING.md README-exynos.md README-mali_fbdev_r4p0.md README.md README-OMAP.md
 %{_bindir}/retroarch
 %{_bindir}/retroarch-cg2glsl
-%{_datadir}/applications/retroarch.desktop
+%{_datadir}/applications/org.libretro.RetroArch.desktop
 %{_datadir}/pixmaps/retroarch.svg
 %{_mandir}/man6/retroarch.6*
 %{_mandir}/man6/retroarch-cg2glsl.6*
-%{_metainfodir}/%{appstream_id}.appdata.xml
+%{_metainfodir}/com.libretro.RetroArch.appdata.xml
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Mon Jun 24 2024 Simone Caronni <negativo17@gmail.com> - 1:1.19.1-1
+- Update to 1.19.1.
+
 * Thu Apr 04 2024 Simone Caronni <negativo17@gmail.com> - 1:1.18.0-1
 - Update to 1.18.0.
 
