@@ -179,7 +179,7 @@ popd
     --enable-lua \
     --enable-materialui \
     --enable-memfd_create \
-    --enable-menu \
+    --enable-menu \ 
     --enable-microphone \
     --enable-mmap \
     --enable-nearest_resampler \
