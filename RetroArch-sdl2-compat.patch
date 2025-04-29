@@ -1,0 +1,12 @@
+diff -Naur RetroArch-1.21.1.old/qb/config.libs.sh RetroArch-1.21.1/qb/config.libs.sh
+--- RetroArch-1.21.1.old/qb/config.libs.sh	2025-04-29 14:53:08.865881720 +0200
++++ RetroArch-1.21.1/qb/config.libs.sh	2025-04-29 14:53:32.485767445 +0200
+@@ -272,7 +272,7 @@
+ check_val '' PIPEWIRE -lpipewire-0.3 '' libpipewire-0.3 '' '' false
+ check_val '' PIPEWIRE_STABLE -lpipewire-0.3 '' libpipewire-0.3 1.0.0 '' false
+ check_val '' SDL -lSDL SDL sdl 1.2.10 '' false
+-check_val '' SDL2 -lSDL2 SDL2 sdl2 2.0.0 '' false
++check_val '' SDL2 -lSDL2 SDL2 sdl2 2.0.0 '' true
+ 
+ if [ "$HAVE_SDL2" = 'yes' ] && [ "$HAVE_SDL" = 'yes' ]; then
+    die : 'Notice: SDL drivers will be replaced by SDL2 ones.'

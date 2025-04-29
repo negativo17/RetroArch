@@ -2,7 +2,7 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.20.0
+Version:        1.21.1
 Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
@@ -282,6 +282,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{desktop_id}.
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Tue Apr 29 2025 Simone Caronni <negativo17@gmail.com> - 1:1.21.1-1
+- Update to 1.21.1.
+
 * Wed Apr 02 2025 Simone Caronni <negativo17@gmail.com> - 1:1.20.0-1
 - Update to 1.20.0.
 
