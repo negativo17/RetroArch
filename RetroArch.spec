@@ -3,7 +3,7 @@
 Name:           RetroArch
 Epoch:          1
 Version:        1.21.1
-Release:        1%{?dist}
+Release:        3%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
@@ -15,14 +15,13 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
 #BuildRequires:  glslang-devel
 BuildRequires:  libappstream-glib
-BuildRequires:  libsixel-devel
 BuildRequires:  libXrandr-devel
 BuildRequires:  libXv-devel
 BuildRequires:  libXxf86vm-devel
 BuildRequires:  lua-devel
 BuildRequires:  mbedtls-devel
 BuildRequires:  mesa-libEGL-devel
-BuildRequires:  mesa-libOSMesa-devel
+BuildRequires:  mesa-libGL-devel
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
@@ -65,6 +64,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  systemd-devel
 
 %if 0%{?fedora}
+BuildRequires:  libsixel-devel
 BuildRequires:  pkgconfig(check) >= 0.15
 BuildRequires:  pkgconfig(libdecor-0)
 %endif
@@ -172,7 +172,6 @@ popd
     --enable-jack \
     --enable-kms \
     --enable-langextra \
-    --enable-libdecor \
     --enable-libretrodb \
     --enable-libshake \
     --enable-libusb \
@@ -213,7 +212,6 @@ popd
     --enable-screenshots \
     --enable-sdl2 \
     --enable-shaderpipeline \
-    --enable-sixel \
     --enable-slang \
     --enable-spirv_cross \
     --enable-ssa \
@@ -254,7 +252,8 @@ popd
     --prefix=%{_prefix} \
 %if 0%{?fedora}
     --enable-check \
-    --enable-libdecor
+    --enable-libdecor \
+    --enable-sixel
 %endif
 
 %make_build
@@ -282,6 +281,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{desktop_id}.
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Thu Oct 16 2025 Simone Caronni <negativo17@gmail.com> - 1:1.21.1-3
+- Adjust build options.
+
 * Tue Apr 29 2025 Simone Caronni <negativo17@gmail.com> - 1:1.21.1-1
 - Update to 1.21.1.
 
