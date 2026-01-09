@@ -2,14 +2,13 @@
 
 Name:           RetroArch
 Epoch:          1
-Version:        1.21.1
-Release:        3%{?dist}
+Version:        1.22.2
+Release:        1%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
 
 Source0:        https://github.com/libretro/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch0:         %{name}-sdl2-compat.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
@@ -25,7 +24,7 @@ BuildRequires:  mesa-libGL-devel
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
-BuildRequires:  pkgconfig(flac)
+#BuildRequires:  pkgconfig(flac)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(gbm) >= 9.0
 BuildRequires:  pkgconfig(gl)
@@ -43,6 +42,7 @@ BuildRequires:  pkgconfig(libswscale) >= 4
 BuildRequires:  pkgconfig(libusb-1.0) >= 1.0.13
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libxml-2.0)
+#BuildRequires:  pkgconfig(libzstd)
 #BuildRequires:  pkgconfig(mpv)
 BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(openssl) >= 1.0.0
@@ -84,6 +84,9 @@ Provides:       bundled(lua)
 Provides:       bundled(rcheevos) = 7.0.2
 Provides:       bundled(SPIRV-Cross)
 Provides:       bundled(stb)
+# Custom patches
+Provides:       bundled(zstd)
+Provides:       bundled(flac)
 
 # Lowercase provide
 Obsoletes:      retroarch <= %{epoch}:%{version}-%{release}
@@ -112,7 +115,6 @@ engines. libretro is completely open and free for anyone to use.
 pushd deps
 rm -rf \
   libfat \
-  libFLAC \
   libiosuhax \
   libvita2d \
   libz \
@@ -128,7 +130,6 @@ popd
 # Not an autotools configure script:
 ./configure \
     --disable-builtinbearssl \
-    --disable-builtinflac \
     --disable-builtinmbedtls \
     --disable-builtinzlib \
     --enable-7zip \
@@ -139,6 +140,7 @@ popd
     --enable-blissbox \
     --enable-bluetooth \
     --enable-bsv_movie \
+    --enable-builtinflac \
     --enable-builtinglslang \
     --enable-caca \
     --enable-cc_resampler \
@@ -159,7 +161,6 @@ popd
     --enable-dynamic \
     --enable-egl \
     --enable-ffmpeg \
-    --enable-flac \
     --enable-freetype \
     --enable-gdi \
     --enable-gfx_widgets \
@@ -249,6 +250,7 @@ popd
     --enable-xshm \
     --enable-xvideo \
     --enable-zlib \
+    --enable-zstd \
     --prefix=%{_prefix} \
 %if 0%{?fedora}
     --enable-check \
@@ -281,6 +283,11 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{desktop_id}.
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Fri Jan 09 2026 Simone Caronni <negativo17@gmail.com> - 1:1.22.2-1
+- Update to 1.22.2.
+- Enable built-in FLAC (https://github.com/libretro/RetroArch/issues/18370) and
+  bundled libzstd.
+
 * Thu Oct 16 2025 Simone Caronni <negativo17@gmail.com> - 1:1.21.1-3
 - Adjust build options.
 
