@@ -3,7 +3,7 @@
 Name:           RetroArch
 Epoch:          1
 Version:        1.22.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
@@ -283,6 +283,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{desktop_id}.
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Sun Sep 20 2026 Simone Caronni <negativo17@gmail.com> - 1:1.22.2-2
+- Rebuild for updated dependencies.
+
 * Fri Jan 09 2026 Simone Caronni <negativo17@gmail.com> - 1:1.22.2-1
 - Update to 1.22.2.
 - Enable built-in FLAC (https://github.com/libretro/RetroArch/issues/18370) and
