@@ -3,12 +3,13 @@
 Name:           RetroArch
 Epoch:          1
 Version:        1.22.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
 
 Source0:        https://github.com/libretro/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch0:         https://gitlab.archlinux.org/archlinux/packaging/packages/retroarch/-/raw/24d093174c3c07b24e48cbf9ceb180aa24bebc3e/ffmpeg-9.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
@@ -283,6 +284,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{desktop_id}.
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Sun Sep 20 2026 Simone Caronni <negativo17@gmail.com> - 1:1.22.2-3
+- Rebuild for updated dependencies.
+
 * Sun Sep 20 2026 Simone Caronni <negativo17@gmail.com> - 1:1.22.2-2
 - Rebuild for updated dependencies.
 
