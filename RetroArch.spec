@@ -1,7 +1,7 @@
 Name:           RetroArch
 Epoch:          1
 Version:        1.19.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Cross-platform, sophisticated frontend for the libretro API
 License:        GPLv3+ and GPLv2 and CC-BY and CC0 and BSD and ASL 2.0 and MIT
 URL:            https://www.libretro.com/
@@ -18,7 +18,6 @@ BuildRequires:  libXxf86vm-devel
 BuildRequires:  lua-devel
 BuildRequires:  mbedtls-devel
 BuildRequires:  mesa-libEGL-devel
-BuildRequires:  mesa-libOSMesa-devel
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(caca)
 BuildRequires:  pkgconfig(dbus-1)
@@ -269,6 +268,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/com.libretro.R
 %config %{_sysconfdir}/retroarch.cfg
 
 %changelog
+* Wed Oct 07 2026 Simone Caronni <negativo17@gmail.com> - 1:1.19.1-2
+- Rebuild for updated dependencies.
+
 * Mon Jun 24 2024 Simone Caronni <negativo17@gmail.com> - 1:1.19.1-1
 - Update to 1.19.1.
 
